@@ -156,7 +156,7 @@ export default {
             this.survey.answers[index] = res.data.data;
             this.alert(true);
             this.calculateTotalVotes();
-            console.log(this.survey.id);
+        
               this.$emit('voting',this.survey.id)
             // store.commit("notify", {
             //   type: "success",
@@ -183,11 +183,11 @@ export default {
       // if (this.voting) {
       //       votes += 1;
       // }
-      console.log(votes);
+    
       return parseInt(10000 * votes / this.totalVotes) / 100;
     },
     calculateTotalVotes() {
-        console.log(this.survey)
+    
       this.totalVotes = 0;
       this.survey.answers.forEach((answer) => {
         this.totalVotes += answer.count
@@ -195,10 +195,9 @@ export default {
         //   this.totalVotes += 1;
         // }
       });
-      console.log('total votes='+this.totalVotes);
+     
     },
       async download() {
-          console.log("printing..");
           const el = this.$refs.printcontent;
 
           const options = {
@@ -215,8 +214,6 @@ export default {
                   .replace("image/png", "image/octet-stream")
           );
           link.click();
-
-          console.log("done");
       }
   },
 

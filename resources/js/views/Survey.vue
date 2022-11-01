@@ -35,8 +35,8 @@
                     :key="item.id"
                     :survey="item"
                     class="animate-fade-in-down"
-                    :voted = "item.vote_ip.includes(user.ip)"
-                    :userIp = user.ip
+                    :voted = "votedSurveys.includes(item.id)"
+                    @voting = "voting(item.id)"
                 />
             </div>
             <div v-else>
@@ -60,7 +60,7 @@ import { ChevronRightIcon } from "@heroicons/vue/outline";
 const route = useRoute();
 const store = useStore();
 
-store.dispatch("getIp");
+
 store.dispatch("getSurvey", route.params.id);
 store.dispatch("getSurveysPublic");
 
@@ -71,6 +71,24 @@ const surveys = computed(() => store.state.surveysPublic.data.filter(item=>{
     return item.id!=route.params.id
 }).slice(0,3))
 
+let votedSurveys = [];
+
+if (localStorage.getItem('votedSurveys')) {
+     votedSurveys = JSON.parse(localStorage.getItem('votedSurveys'));
+ }
+
+function voting(survey_id){
+     if (survey_id){
+         votedSurveys.push(survey_id);
+         saveVote();
+     }
+
+}
+
+function saveVote(){
+    const parsed = JSON.stringify(votedSurveys);
+    localStorage.setItem('votedSurveys', parsed);
+}
 
 </script>
 

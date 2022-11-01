@@ -15,7 +15,7 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
             backgroundImage: {
-                'main': "url('https://votekzfree.tk/img/main.jpg')",
+                'main': "url('/img/main.jpg')",
             },
             screens: {
                 'xs': '475px',

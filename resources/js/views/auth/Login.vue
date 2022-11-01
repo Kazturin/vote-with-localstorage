@@ -3,7 +3,7 @@
       <router-link :to="{name:'Main'}">
         <img
            class="mx-auto h-12 w-auto"
-           src="https://votekzfree.tk/img/logo.png"
+           src="/img/logo.png"
            alt="Workflow"
         />
       </router-link>

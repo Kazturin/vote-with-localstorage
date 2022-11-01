@@ -17,7 +17,7 @@
                 <router-link :to="{name:'Main'}">
                     <img
                         class="h-8"
-                        src="https://votekzfree.tk/img/logo.png"
+                        src="/img/logo.png"
                         alt="Workflow"
                     />
                 </router-link>
