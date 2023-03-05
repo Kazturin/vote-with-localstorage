@@ -84,12 +84,12 @@ class SurveyController extends Controller
     {
         if ($request->category_id){
             return SurveyResource::collection(
-                Survey::where('category_id',$request->category_id)->where(function($query) {
+                Survey::where('availability',1)->where('category_id',$request->category_id)->where(function($query) {
                      $query->whereDate('expire_date','>=',date('Ymd'))
                            ->orWhere('status', 1);
                          })->orderBy('created_at', 'DESC')->paginate(6));
         }
-        return SurveyResource::collection(Survey::whereDate('expire_date','>=',date('Ymd'))
+        return SurveyResource::collection(Survey::where('availability',1)->whereDate('expire_date','>=',date('Ymd'))
             ->orWhere('status', 1)->orderBy('created_at', 'DESC')->paginate(6));
     }
 

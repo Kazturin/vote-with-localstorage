@@ -18,7 +18,7 @@ class Survey extends Model
     const TYPE_RADIO = 'radio';
     const TYPE_CHECKBOX = 'checkbox';
 
-    protected $fillable = ['user_id', 'image', 'title', 'slug', 'status', 'description','category_id', 'expire_date'];
+    protected $fillable = ['user_id', 'image', 'title', 'slug', 'status', 'availability', 'description','category_id', 'expire_date'];
 
     public function getSlugOptions(): SlugOptions
     {

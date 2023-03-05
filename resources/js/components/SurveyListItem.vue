@@ -81,7 +81,29 @@
               <TrashIcon class="w-5 h-5" />
           </TButton>
       </div>
-
+      <div v-if="edit">
+          <a
+              :href="`/survey/${survey.id}`"
+              target="_blank"
+              class="flex py-2 px-4 border border-transparent text-sm rounded-md text-indigo-500 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mr-2"
+          >
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+              >
+                  <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+              </svg>
+              Ссылка
+          </a>
+      </div>
     <Transition name="fade">
       <div v-if="success" class="poll-view__info absolute inset-0 z-50 rounded-lg bg-lime-500" >
         <div class="absolute left-2/4 top-2/4 transform -translate-x-1/2 -translate-y-1/2 text-white  text-3xl text-center">
@@ -156,7 +178,7 @@ export default {
             this.survey.answers[index] = res.data.data;
             this.alert(true);
             this.calculateTotalVotes();
-        
+
               this.$emit('voting',this.survey.id)
             // store.commit("notify", {
             //   type: "success",
@@ -183,11 +205,11 @@ export default {
       // if (this.voting) {
       //       votes += 1;
       // }
-    
+
       return parseInt(10000 * votes / this.totalVotes) / 100;
     },
     calculateTotalVotes() {
-    
+
       this.totalVotes = 0;
       this.survey.answers.forEach((answer) => {
         this.totalVotes += answer.count
@@ -195,7 +217,7 @@ export default {
         //   this.totalVotes += 1;
         // }
       });
-     
+
     },
       async download() {
           const el = this.$refs.printcontent;

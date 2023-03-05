@@ -147,6 +147,21 @@
             </div>
           </div>
           <!--/ Status -->
+            <div>
+                <label for="category" class="block text-sm font-medium text-gray-700">
+                    Статус
+                </label>
+                <div class="mt-1">
+                    <select class="w-1/3 form-select px-4 py-3 pr-8 rounded-md border-gray-300 focus:border-gray-500"
+                            name="availability"
+                            id="availability"
+                            v-model="model.availability">
+                        <option :value="true">Публичный</option>
+                        <option :value="false">Приватный(доступно по url)</option>
+                    </select>
+                </div>
+            </div>
+
         </div>
         <!--/ Survey Fields -->
 
@@ -225,6 +240,7 @@ let model = ref({
   title: "",
   slug: "",
   status: false,
+  availability:true,
   description: null,
   image: null,
   image_url: null,

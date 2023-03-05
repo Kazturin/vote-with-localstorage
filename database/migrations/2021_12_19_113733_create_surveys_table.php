@@ -20,6 +20,7 @@ class CreateSurveysTable extends Migration
             $table->string('title', 255);
             $table->string('slug', 500);
             $table->tinyInteger('status');
+            $table->boolean('availability');
             $table->text('description')->nullable();
             $table->foreignIdFor(\App\Models\Category::class, 'category_id');
             $table->timestamps();

@@ -7,14 +7,14 @@
             </TButton>
         </template>
         <div v-if="loading" class="flex justify-center">Loading...</div>
-        <div v-else-if="survey && user.ip">
+        <div v-else-if="survey">
             <div class="flex items-center">
                 <div class="w-96">
                     <SurveyListItem
                         :survey="survey"
                         class="animate-fade-in-down"
-                        :voted = "survey.vote_ip.includes(user.ip)"
-                        :userIp = user.ip
+                        :voted = "votedSurveys.includes(survey.id)"
+                        @voting = "voting(survey.id)"
                     />
                 </div>
             </div>
@@ -82,7 +82,6 @@ function voting(survey_id){
          votedSurveys.push(survey_id);
          saveVote();
      }
-
 }
 
 function saveVote(){
