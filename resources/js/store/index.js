@@ -3,6 +3,7 @@ import axiosClient from "../axios";
 
 const store = createStore({
   state: {
+    lang: localStorage.getItem('lang') || 'kz',
     user: {
       data: null,
       ip: null,
@@ -202,7 +203,9 @@ const store = createStore({
       state.user.data = null;
       sessionStorage.removeItem("TOKEN");
     },
-
+    setLanguage: (state) => {
+      state.lang = localStorage.getItem('lang') || 'kz';
+    },
     setUser: (state, user) => {
       state.user.data = user;
     },

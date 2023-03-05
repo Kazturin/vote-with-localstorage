@@ -107,6 +107,21 @@
                   </MenuItems>
                 </transition>
               </Menu>
+                <div class="w-20 mx-2">
+                    <select
+                        name="lang"
+                        class="mt-1 block w-full py-2 px-3 border-0 bg-white rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+                        v-model="locale"
+                        @change="switchLang"
+                    >
+                        <option value="kz">
+                            KAZ
+                        </option>
+                        <option value="ru">
+                            RUS
+                        </option>
+                    </select>
+                </div>
             </div>
           </div>
           <div class="-mr-2 flex md:hidden">
@@ -181,6 +196,22 @@
             </RouterLink>
           </div>
         </div>
+          <div class="w-20 mr-2">
+              <select
+                  name="lang"
+                  class="mt-1 block w-full py-2 px-3 border-0 bg-white rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
+                  v-model="locale"
+                  @change="switchLang"
+              >
+                  <option value="kz">
+                      KAZ
+                  </option>
+                  <option value="ru">
+                      RUS
+                  </option>
+              </select>
+          </div>
+
       </DisclosurePanel>
     </Disclosure>
     <router-view :key="$route.path"></router-view>
@@ -204,11 +235,9 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import Notification from "./Notification.vue";
+import { useI18n } from 'vue-i18n';
 
-const navigation = [
-  { name: "Опросы", to: { name: "Surveys" } },
-  { name: "Мой опросы", to: { name: "MySurveys" } },
-];
+
 
 export default {
   components: {
@@ -225,11 +254,18 @@ export default {
     Notification,
   },
   setup() {
+      const { t, locale } = useI18n({
+          inheritLocale: true,
+          useScope: 'global'
+      });
+
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
-
-
+    /*  const navigation = [
+          { name: t('category.news'), to: { name: "Surveys" } },
+          { name: "Мой опросы", to: { name: "MySurveys" } },
+      ];*/
 
     function logout() {
       store.dispatch("logout").then(() => {
@@ -243,10 +279,25 @@ export default {
         store.dispatch("getUser");
     }
 
+      function switchLang(ev){
+          console.log(ev.target.value)
+          locale.value = ev.target.value;
+          localStorage.setItem('lang',ev.target.value);
+          store.commit('setLanguage');
+          router.push({
+              name: "Main",
+          });
+      }
+
     return {
+      t, locale,
       user: computed(() => store.state.user),
-      navigation,
+      navigation: computed(() => [
+          { name: t('nav.surveys'), to: { name: "Surveys" } },
+          { name: t('nav.my_surveys'), to: { name: "MySurveys" } },
+      ]),
       logout,
+      switchLang
     };
   },
 };

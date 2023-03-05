@@ -1,13 +1,13 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <PageComponent title="Опросы">
+  <PageComponent :title="$t('nav.surveys')">
 
     <template v-slot:header>
       <div>
 <!--        <h1 class="text-3xl font-bold text-gray-900">Опросы</h1>-->
         <TButton color="green" :to="{ name: 'SurveyCreate' }">
           <PlusIcon class="w-5 h-5" />
-          Добавить
+          {{ $t('add') }}
         </TButton>
       </div>
     </template>
