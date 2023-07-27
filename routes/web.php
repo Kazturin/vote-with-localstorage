@@ -16,6 +16,9 @@ Route::get('survey/{survey}', function (\App\Models\Survey $survey) {
     return view('app',['title'=>$survey->title]);
 });
 
+Route::get('/admin', function () {
+    return redirect('/admin/users');
+});
 Route::group(['middleware' => ['admin']], function () {
     Route::group(['prefix' => 'admin'], function()
     {
